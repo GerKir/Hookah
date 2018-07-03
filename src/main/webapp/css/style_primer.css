@@ -1,0 +1,86 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+
+/*@font-face {
+  src: url("../fonts/RopaSansSCPro-Regular.otf") format("truetype");
+  font-family: 'RopaSansSCPro';
+  font-style: normal;
+  font-weight: normal;*/
+
+html,
+body{
+  /*margin-top: 6em;*/
+  width: 100%;
+  height: 100%;
+  font-size: 20px;
+}
+
+#menu-button{
+  display: none;
+  padding: 1em;
+  box-sizing: border-box;
+  background: rgb(184, 42, 39);
+}
+
+ul{
+  list-style: none;
+  display: flex;
+  /*width: 4em;*/
+  height: 4em;
+  margin-right: 2em;
+  width: 100%;
+  justify-content: space-evenly;
+}
+
+li{
+  background-color: rgb(116, 46, 180);
+  text-align: center;
+  padding: 1em;
+  box-sizing: border-box;
+  color: rgb(255, 255, 255);
+}
+
+li:hover{
+  background: rgb(90, 112, 180);
+  border-radius: 1em;
+  color: rgb(0, 0, 0);
+  box-shadow: 4px 4px 2px rgb(58, 131, 84);
+  transition-duration: 300ms;
+  transition-timing-function: ease-out;
+  cursor: pointer;
+}
+
+li:hover .sub{
+  display: flex;
+}
+
+.sub{
+  display: none;
+  margin-top: 2.3em;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 15em;
+}
+
+.sub li{
+  background: rgb(86, 133, 102);
+}
+
+@media (max-width: 640px){
+  html,
+  body{
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 321px){
+  #menu-button{
+    display: block;
+  }
+  ul{
+    display: none;
+  flex-direction: column;
+}
+}
