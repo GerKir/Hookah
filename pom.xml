@@ -11,7 +11,7 @@
 
     <name>jsf_webapp Maven Webapp</name>
     <!-- FIXME change it to the project's website -->
-    <url>http://www.example.com</url>
+    <!--<url>http://www.example.com</url>-->
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -35,11 +35,11 @@
             <!--<version>2.1.7</version>-->
         <!--</dependency>-->
 
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-            <version>3.1.0</version>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>javax.servlet</groupId>-->
+            <!--<artifactId>javax.servlet-api</artifactId>-->
+            <!--<version>3.1.0</version>-->
+        <!--</dependency>-->
 
         <!--<dependency>-->
         <!--<groupId>junit</groupId>-->
