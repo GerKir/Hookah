@@ -12,25 +12,25 @@
     <url>https://intense-sands-40064.herokuapp.com/</url>
 
     <!--<properties>-->
-        <!--<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>-->
-        <!--&lt;!&ndash;<maven.compiler.source>1.7</maven.compiler.source>&ndash;&gt;-->
-        <!--&lt;!&ndash;<maven.compiler.target>1.7</maven.compiler.target>&ndash;&gt;-->
+    <!--<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>-->
+    <!--&lt;!&ndash;<maven.compiler.source>1.7</maven.compiler.source>&ndash;&gt;-->
+    <!--&lt;!&ndash;<maven.compiler.target>1.7</maven.compiler.target>&ndash;&gt;-->
     <!--</properties>-->
 
     <dependencies>
 
         <!--&lt;!&ndash;добовляет поддержку синтаксиса jsf&ndash;&gt;-->
         <!--<dependency>-->
-            <!--<groupId>com.sun.faces</groupId>-->
-            <!--<artifactId>jsf-api</artifactId>-->
-            <!--<version>2.2.17</version>-->
+        <!--<groupId>com.sun.faces</groupId>-->
+        <!--<artifactId>jsf-api</artifactId>-->
+        <!--<version>2.2.17</version>-->
         <!--</dependency>-->
 
         <!--&lt;!&ndash;хз что это&ndash;&gt;-->
         <!--<dependency>-->
-            <!--<groupId>com.sun.faces</groupId>-->
-            <!--<artifactId>jsf-impl</artifactId>-->
-            <!--<version>2.1.7</version>-->
+        <!--<groupId>com.sun.faces</groupId>-->
+        <!--<artifactId>jsf-impl</artifactId>-->
+        <!--<version>2.1.7</version>-->
         <!--</dependency>-->
 
         <dependency>
@@ -39,31 +39,53 @@
             <version>4.0.1</version>
         </dependency>
 
+        <!--&lt;!&ndash; https://mvnrepository.com/artifact/postgresql/postgresql &ndash;&gt;-->
+        <!--<dependency>-->
+            <!--<groupId>postgresql</groupId>-->
+            <!--<artifactId>postgresql</artifactId>-->
+            <!--<version>9.1-901-1.jdbc4</version>-->
+        <!--</dependency>-->
+        <!--&lt;!&ndash; https://mvnrepository.com/artifact/org.postgresql/postgresql &ndash;&gt;-->
+        <!--<dependency>-->
+            <!--<groupId>org.postgresql</groupId>-->
+            <!--<artifactId>postgresql</artifactId>-->
+            <!--<version>42.2.2</version>-->
+        <!--</dependency>-->
+
+        <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
         <dependency>
-        <groupId>junit</groupId>
-        <artifactId>junit</artifactId>
-        <version>4.12</version>
-        <scope>test</scope>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.6</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 
     <build>
         <finalName>jsf_webapp</finalName>
-        <!--<pluginManagement>&lt;!&ndash; lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) &ndash;&gt;-->
-            <plugins>
-                <plugin>
-                    <artifactId>maven-war-plugin</artifactId>
-                    <version>3.2.2</version>
-                </plugin>
+        <plugins>
+            <plugin>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.2.2</version>
+            </plugin>
 
-                <plugin>
+            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
                 <version>3.1.1</version>
                 <executions>
                     <execution>
                         <phase>package</phase>
-                        <goals><goal>copy</goal></goals>
+                        <goals>
+                            <goal>copy</goal>
+                        </goals>
                         <configuration>
                             <artifactItems>
                                 <artifactItem>
@@ -77,43 +99,44 @@
                     </execution>
                 </executions>
             </plugin>
-                <!--<plugin>-->
-                <!--<groupId>com.heroku.sdk</groupId>-->
-                <!--<artifactId>heroku-maven-plugin</artifactId>-->
-                <!--<version>2.0.3</version>-->
-                <!--<configuration>-->
-                <!--<processTypes>-->
-                <!--<web>java $JAVA_OPTS -cp target/classes:target/dependency/* Main</web>-->
-                <!--</processTypes>-->
-                <!--</configuration>-->
-                <!--</plugin>-->
-                <!--<plugin>-->
-                    <!--<artifactId>maven-clean-plugin</artifactId>-->
-                    <!--<version>3.0.0</version>-->
-                <!--</plugin>-->
-                <!--&lt;!&ndash; see http://maven.apache.org/ref/current/maven-core/default-bindings.html#Plugin_bindings_for_war_packaging &ndash;&gt;-->
-                <!--<plugin>-->
-                    <!--<artifactId>maven-resources-plugin</artifactId>-->
-                    <!--<version>3.0.2</version>-->
-                <!--</plugin>-->
-                <!--<plugin>-->
-                    <!--<artifactId>maven-compiler-plugin</artifactId>-->
-                    <!--<version>3.7.0</version>-->
-                <!--</plugin>-->
-                <!--<plugin>-->
-                    <!--<artifactId>maven-surefire-plugin</artifactId>-->
-                    <!--<version>2.20.1</version>-->
-                <!--</plugin>-->
 
-                <!--<plugin>-->
-                    <!--<artifactId>maven-install-plugin</artifactId>-->
-                    <!--<version>2.5.2</version>-->
-                <!--</plugin>-->
-                <!--<plugin>-->
-                    <!--<artifactId>maven-deploy-plugin</artifactId>-->
-                    <!--<version>2.8.2</version>-->
-                <!--</plugin>-->
-            </plugins>
-        <!--</pluginManagement>-->
+
+            <!--<plugin>-->
+            <!--<groupId>com.heroku.sdk</groupId>-->
+            <!--<artifactId>heroku-maven-plugin</artifactId>-->
+            <!--<version>2.0.3</version>-->
+            <!--<configuration>-->
+            <!--<processTypes>-->
+            <!--<web>java $JAVA_OPTS -cp target/classes:target/dependency/* Main</web>-->
+            <!--</processTypes>-->
+            <!--</configuration>-->
+            <!--</plugin>-->
+            <!--<plugin>-->
+            <!--<artifactId>maven-clean-plugin</artifactId>-->
+            <!--<version>3.0.0</version>-->
+            <!--</plugin>-->
+            <!--&lt;!&ndash; see http://maven.apache.org/ref/current/maven-core/default-bindings.html#Plugin_bindings_for_war_packaging &ndash;&gt;-->
+            <!--<plugin>-->
+            <!--<artifactId>maven-resources-plugin</artifactId>-->
+            <!--<version>3.0.2</version>-->
+            <!--</plugin>-->
+            <!--<plugin>-->
+            <!--<artifactId>maven-compiler-plugin</artifactId>-->
+            <!--<version>3.7.0</version>-->
+            <!--</plugin>-->
+            <!--<plugin>-->
+            <!--<artifactId>maven-surefire-plugin</artifactId>-->
+            <!--<version>2.20.1</version>-->
+            <!--</plugin>-->
+
+            <!--<plugin>-->
+            <!--<artifactId>maven-install-plugin</artifactId>-->
+            <!--<version>2.5.2</version>-->
+            <!--</plugin>-->
+            <!--<plugin>-->
+            <!--<artifactId>maven-deploy-plugin</artifactId>-->
+            <!--<version>2.8.2</version>-->
+            <!--</plugin>-->
+        </plugins>
     </build>
 </project>

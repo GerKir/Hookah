@@ -1,6 +1,7 @@
 package ru.gerkir;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -25,11 +26,23 @@ public class NewServlet extends HttpServlet {
 
         String s1 = request.getParameter("login");
         String s2 = request.getParameter("password");
-        if (s1.equals("admin") && s2.equals("322")) {
-            response.sendRedirect(request.getContextPath() + "/account.jsp");
-        } else {
-            response.sendRedirect(request.getContextPath() + "/signup.jsp");
+
+        try {
+            if (BaseWorker.check(s1, s2)) {
+                response.sendRedirect(request.getContextPath() + "/account.jsp");
+            } else {
+                response.sendRedirect(request.getContextPath() + "/signup.jsp");
+            }
+        } catch (ClassNotFoundException e) {
+            //it means that bd not work
+            response.sendRedirect(request.getContextPath() + "/index.html");
 
         }
+
+//        if (s1.equals("admin") && s2.equals("322")) {
+//            response.sendRedirect(request.getContextPath() + "/account.jsp");
+//        } else {
+//            response.sendRedirect(request.getContextPath() + "/signup.jsp");
+//        }
     }
 }
