@@ -13,8 +13,6 @@
     <title>JSP Page</title>
 </head>
 <body>
-<h1>Hello,
-</h1>
 <a href="index.html">На главную</a>
 </body>
 </html>

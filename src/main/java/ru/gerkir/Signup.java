@@ -1,5 +1,6 @@
 package ru.gerkir;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,7 +12,7 @@ public class Signup extends HttpServlet {
     @Override
     protected void doGet(
             HttpServletRequest req, HttpServletResponse resp)
-            throws IOException {
+            throws IOException, ServletException {
 
         doPost(req, resp);
     }
@@ -19,21 +20,24 @@ public class Signup extends HttpServlet {
     @Override
     protected void doPost(
             HttpServletRequest request, HttpServletResponse response)
-            throws IOException {
+            throws IOException, ServletException {
 
         String s1 = request.getParameter("login");
         String s2 = request.getParameter("password");
-
-        try {
-            BaseWorker.register(s1, s2);
-            response.sendRedirect(request.getContextPath() + "/account.jsp");
-
-        } catch (ClassNotFoundException e) {
-            //it means that bd not work
-            response.sendRedirect(request.getContextPath() + "/index.html");
-
-        } catch (SQLException e) {
-            response.sendRedirect(request.getContextPath() + "/list.html");
+        // TODO: 21.07.18 добавить верификацию
+        response.addHeader("login", s1);
+        if (s1 == null || s2 == null || s1.equals("") || s2.equals("")) {
+            response.addHeader("message", "Заполните все поля");
+            request.getRequestDispatcher("/signup.jsp").forward(request, response);
         }
+        else if (BaseWorker.registrationSuccsess(s1, s2)){
+            // TODO: 21.07.18 добавить сообщение, что регистрация прошла успешно
+            response.sendRedirect(request.getContextPath() + "/account.jsp");
+        }
+        else {
+            response.addHeader("message", "Такой пользователь уже существует");
+            request.getRequestDispatcher("/signup.jsp").forward(request, response);
+        }
+
     }
 }

@@ -33,9 +33,18 @@
     <div class="login">
         <h1>Зарегистрироваться</h1>
 
-        <form form action="/ru.gerkir.Signup" method="post">
-            <p><input type="text" name="login" value="" placeholder="Логин"></p>
+        <form action="signup" method="post">
+            <p><input type="text" name="login"
+                      placeholder="Логин"
+                      value=
+                          <%if (response.getHeader("login") != null) out.println(response.getHeader("login"));
+                          else out.println("");%>
+            >
+            </p>
             <p><input type="password" name="password" value="" placeholder="Пароль"></p>
+            <p>
+                <%if (response.getHeader("message") != null) out.println(response.getHeader("message"));%>
+            </p>
             <p class="remember_me">
             </p>
             <p class="submit"><input type="submit" name="commit" value="Зарегистрироваться"></p>
@@ -43,7 +52,7 @@
     </div>
 
     <div class="login-help">
-        <a href="index.html">Забыли пароль?</a> / <a href="index.html">Регистрация</a>
+        <a href="index.html">Забыли пароль?</a> / <a href="signin">Войти</a>
     </div>
 </section>
 </body>

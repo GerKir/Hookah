@@ -23,11 +23,21 @@ public class BaseWorker {
         }
     }
 
-    public static void register(String account_name, String account_password) throws ClassNotFoundException, SQLException {
-        Class.forName("com.mysql.jdbc.Driver");
+    public static boolean registrationSuccsess(String account_name, String account_password) {
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+            return false;
+        }
         try (Connection connection = DriverManager.getConnection(BaseWorker.url, user, password);
              Statement statement = connection.createStatement()) {
             statement.executeUpdate("insert into users (account, password) VALUES ('" + account_name + "','" + account_password + "');");
+            return true;
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+            return false;
         }
     }
 }

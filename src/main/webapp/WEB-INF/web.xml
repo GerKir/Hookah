@@ -16,7 +16,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>Signin</servlet-name>
-        <url-pattern>/ru.gerkir.Signin</url-pattern>
+        <url-pattern>/signin</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -25,6 +25,6 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>Signup</servlet-name>
-        <url-pattern>/ru.gerkir.Signup</url-pattern>
+        <url-pattern>/signup</url-pattern>
     </servlet-mapping>
 </web-app>

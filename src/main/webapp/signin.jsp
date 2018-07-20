@@ -32,11 +32,17 @@
 <section class="container">
     <div class="login">
         <h1>Войти в личный кабинет</h1>
-        <form form action="/ru.gerkir.Signin" method="post">
-            <p><input type="text" name="login" value="" placeholder="Логин"></p>
+        <form action="signin" method="post">
+            <p><input type="text" name="login"
+                      placeholder="Логин"
+                      value=
+                          <%if (response.getHeader("login") != null) out.println(response.getHeader("login"));
+                          else out.println("");%>
+            >
+            </p>
             <p><input type="password" name="password" value="" placeholder="Пароль"></p>
             <p>
-                <%if (response.getHeader("error") != null) out.println(response.getHeader("error"));%>
+                <%if (response.getHeader("message") != null) out.println(response.getHeader("message"));%>
             </p>
             <p class="remember_me">
                 <label>
@@ -48,8 +54,8 @@
         </form>
     </div>
 
-        <div class="login-help">
-        <a href="index.html">Забыли пароль?</a> / <a href="signup.jsp">Регистрация</a>
+    <div class="login-help">
+        <a href="index.html">Забыли пароль?</a> / <a href="signup">Регистрация</a>
     </div>
 </section>
 </body>
