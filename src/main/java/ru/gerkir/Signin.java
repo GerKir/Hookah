@@ -1,0 +1,46 @@
+package ru.gerkir;
+
+import ru.gerkir.BaseWorker;
+
+import java.io.IOException;
+import java.sql.SQLException;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+public class Signin extends HttpServlet {
+
+    @Override
+    protected void doGet(
+            HttpServletRequest req, HttpServletResponse resp)
+            throws IOException, ServletException {
+
+        doPost(req, resp);
+    }
+
+    @Override
+    protected void doPost(
+            HttpServletRequest request, HttpServletResponse response)
+            throws IOException, ServletException {
+
+        String s1 = request.getParameter("login");
+        String s2 = request.getParameter("password");
+
+        try {
+            if (BaseWorker.check(s1, s2)) {
+                response.sendRedirect(request.getContextPath() + "/account.jsp");
+            } else {
+                response.addHeader("error", "Wrong values");
+//                request.setAttribute("error", (String) "Неверные данные");
+                request.getRequestDispatcher("signin.jsp").forward(request, response);
+//                response.sendRedirect(request.getContextPath() + "/signin.jsp");
+            }
+        } catch (ClassNotFoundException e) {
+            //it means that bd not work
+            response.sendRedirect(request.getContextPath() + "/index.html");
+
+        }
+    }
+}

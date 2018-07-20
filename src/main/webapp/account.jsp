@@ -1,4 +1,4 @@
-<%--<%@ taglib prefix="h" uri="http://java.sun.com/jsf/html" %>--%>
+<%@ page import="com.mysql.jdbc.interceptors.SessionAssociationInterceptor" %><%--<%@ taglib prefix="h" uri="http://java.sun.com/jsf/html" %>--%>
 <%--
     Document   : account
     Created on : 13.06.2018, 15:49:18
@@ -13,7 +13,7 @@
     <title>JSP Page</title>
 </head>
 <body>
-<h1>Hello, <%="Kirill"%>
+<h1>Hello,
 </h1>
 <a href="index.html">На главную</a>
 </body>

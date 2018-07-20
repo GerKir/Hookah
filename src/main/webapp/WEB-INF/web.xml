@@ -11,12 +11,20 @@
     <!--xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">-->
 
     <servlet>
-    <servlet-name>NewServlet</servlet-name>
-    <servlet-class>ru.gerkir.NewServlet</servlet-class>
+        <servlet-name>Signin</servlet-name>
+        <servlet-class>ru.gerkir.Signin</servlet-class>
     </servlet>
-
     <servlet-mapping>
-    <servlet-name>NewServlet</servlet-name>
-    <url-pattern>/NewServlet</url-pattern>
+        <servlet-name>Signin</servlet-name>
+        <url-pattern>/ru.gerkir.Signin</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Signup</servlet-name>
+        <servlet-class>ru.gerkir.Signup</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Signup</servlet-name>
+        <url-pattern>/ru.gerkir.Signup</url-pattern>
     </servlet-mapping>
 </web-app>

@@ -1,15 +1,12 @@
 package ru.gerkir;
 
-import java.io.IOException;
-import java.sql.SQLException;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.sql.SQLException;
 
-//@WebServlet(name = "NewServlet", urlPatterns = {"/NewServlet"})
-public class NewServlet extends HttpServlet {
+public class Signup extends HttpServlet {
 
     @Override
     protected void doGet(
@@ -28,21 +25,15 @@ public class NewServlet extends HttpServlet {
         String s2 = request.getParameter("password");
 
         try {
-            if (BaseWorker.check(s1, s2)) {
-                response.sendRedirect(request.getContextPath() + "/account.jsp");
-            } else {
-                response.sendRedirect(request.getContextPath() + "/signup.jsp");
-            }
+            BaseWorker.register(s1, s2);
+            response.sendRedirect(request.getContextPath() + "/account.jsp");
+
         } catch (ClassNotFoundException e) {
             //it means that bd not work
             response.sendRedirect(request.getContextPath() + "/index.html");
 
+        } catch (SQLException e) {
+            response.sendRedirect(request.getContextPath() + "/list.html");
         }
-
-//        if (s1.equals("admin") && s2.equals("322")) {
-//            response.sendRedirect(request.getContextPath() + "/account.jsp");
-//        } else {
-//            response.sendRedirect(request.getContextPath() + "/signup.jsp");
-//        }
     }
 }

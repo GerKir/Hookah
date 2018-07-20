@@ -1,4 +1,4 @@
-<%-- 
+<%--
     Document   : newjsp
     Created on : 13.06.2018, 15:41:57
     Author     : gerkir
@@ -31,19 +31,25 @@
 
 <section class="container">
     <div class="login">
-        <h1>Зарегистрироваться</h1>
-
-        <form form action="/ru.gerkir.Signup" method="post">
+        <h1>Войти в личный кабинет</h1>
+        <form form action="/ru.gerkir.Signin" method="post">
             <p><input type="text" name="login" value="" placeholder="Логин"></p>
             <p><input type="password" name="password" value="" placeholder="Пароль"></p>
-            <p class="remember_me">
+            <p>
+                <%if (response.getHeader("error") != null) out.println(response.getHeader("error"));%>
             </p>
-            <p class="submit"><input type="submit" name="commit" value="Зарегистрироваться"></p>
+            <p class="remember_me">
+                <label>
+                    <input type="checkbox" name="remember_me" id="remember_me">
+                    Запомнить меня
+                </label>
+            </p>
+            <p class="submit"><input type="submit" name="commit" value="Войти"></p>
         </form>
     </div>
 
-    <div class="login-help">
-        <a href="index.html">Забыли пароль?</a> / <a href="index.html">Регистрация</a>
+        <div class="login-help">
+        <a href="index.html">Забыли пароль?</a> / <a href="signup.jsp">Регистрация</a>
     </div>
 </section>
 </body>
