@@ -35,6 +35,10 @@ public class Signup extends HttpServlet {
         else if (BaseWorker.registrationSuccsess(s1, s2)){
             // TODO: 21.07.18 добавить сообщение, что регистрация прошла успешно
             response.sendRedirect(request.getContextPath() + "/account.jsp");
+
+//            response.addHeader("loggin", s1);
+//            response.addHeader("message", "Регистрация прошла успешно!");
+//            request.getRequestDispatcher("/signin.jsp").forward(request, response);
         }
         else {
             response.addHeader("message", "Такой пользователь уже существует");

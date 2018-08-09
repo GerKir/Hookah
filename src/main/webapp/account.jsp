@@ -11,12 +11,18 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>JSP Page</title>
+    <title>Account</title>
 </head>
 <body>
-Hi,
-<% User user = (User) request.getSession().getAttribute("user");
-    out.println(user.getName());%>
-<a href="index.html">На главную</a>
+<%
+    try {
+        User user = (User) request.getSession().getAttribute("user");
+        if (user.getMail() != null) out.println("Hi, " + user.getName());
+        else out.println("Yo!");
+    }
+    catch (Exception e){
+        out.println(e.toString());
+    } %>
+<br><a href="index.html">На главную</a>
 </body>
 </html>

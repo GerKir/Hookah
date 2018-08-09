@@ -1,12 +1,12 @@
 package ru.gerkir;
 
 
-import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 @WebServlet("/signin")
 public class Signin extends HttpServlet {
@@ -33,9 +33,8 @@ public class Signin extends HttpServlet {
         try {
             if (BaseWorker.check(s1, s2)) {
                 request.getSession().setAttribute("user", BaseWorker.getUser(s1));
-                request.getRequestDispatcher("/account.jsp").forward(request, response);
-
-//                response.sendRedirect(request.getContextPath() + "/account.jsp");
+//                request.getRequestDispatcher("/account.jsp").forward(request, response);
+                response.sendRedirect(request.getContextPath() + "/account.jsp");
             } else {
                 response.addHeader("message", "Неверный аккаунт или пароль");
                 request.getRequestDispatcher("/signin.jsp").forward(request, response);
