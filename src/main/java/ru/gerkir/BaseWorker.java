@@ -34,10 +34,49 @@ public class BaseWorker {
              Statement statement = connection.createStatement()) {
             statement.executeUpdate("insert into users (account, password) VALUES ('" + account_name + "','" + account_password + "');");
             return true;
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
             return false;
         }
     }
+
+    public static User getUser(String account_name){
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        try (Connection connection = DriverManager.getConnection(BaseWorker.url, user, password);
+             Statement statement = connection.createStatement()) {
+            ResultSet resultSet = statement.executeQuery("select * from users where account = '" + account_name + "';");
+            resultSet.next();
+
+            User user = new User();
+            user.setName(resultSet.getString("name"));
+            user.setMail(resultSet.getString("mail"));
+            user.setRoot(resultSet.getString("root").equals("1")?true:false);
+
+            return user;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+//    public static String getName(String account_name, String account_password) {
+//        try {
+//            Class.forName("com.mysql.jdbc.Driver");
+//        } catch (ClassNotFoundException e) {
+//            e.printStackTrace();
+//        }
+//        try (Connection connection = DriverManager.getConnection(BaseWorker.url, user, password);
+//             Statement statement = connection.createStatement()) {
+//            ResultSet resultSet = statement.executeQuery("select * from users where account = '" + account_name + "';");
+//            resultSet.next();
+//            return resultSet.getString("name");
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//        return null;
+//    }
 }
