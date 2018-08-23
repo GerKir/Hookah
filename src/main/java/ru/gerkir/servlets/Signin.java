@@ -1,12 +1,14 @@
-package ru.gerkir;
+package ru.gerkir.servlets;
 
+
+import ru.gerkir.BaseWorker;
+import ru.gerkir.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.*;
 import java.io.IOException;
+import java.nio.file.attribute.UserPrincipalNotFoundException;
 
 @WebServlet("/signin")
 public class Signin extends HttpServlet {
@@ -30,20 +32,14 @@ public class Signin extends HttpServlet {
             response.addHeader("message", "Заполните все поля");
             request.getRequestDispatcher("/signin.jsp").forward(request, response);
         }
-        try {
-            if (BaseWorker.check(s1, s2)) {
-                request.getSession().setAttribute("user", BaseWorker.getUser(s1));
-//                request.getRequestDispatcher("/account.jsp").forward(request, response);
-                response.sendRedirect(request.getContextPath() + "/account.jsp");
-            } else {
-                response.addHeader("message", "Неверный аккаунт или пароль");
-                request.getRequestDispatcher("/signin.jsp").forward(request, response);
-            }
-        }
-        catch (ClassNotFoundException e) {
-            //it means that bd not work
-            response.sendRedirect(request.getContextPath() + "/index.html");
 
+        try {
+            User user = BaseWorker.getUser(s1, s2);
+            request.getSession().setAttribute("user", user);
+            response.sendRedirect("/account");
+        } catch (UserPrincipalNotFoundException e){
+            response.addHeader("message", "Неверный аккаунт или пароль");
+            request.getRequestDispatcher("/signin.jsp").forward(request, response);
         }
     }
 }

@@ -1,4 +1,6 @@
-package ru.gerkir;
+package ru.gerkir.servlets;
+
+import ru.gerkir.BaseWorker;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

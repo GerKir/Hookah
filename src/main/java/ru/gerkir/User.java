@@ -1,12 +1,12 @@
 package ru.gerkir;
 
+
 public class User {
     private String name;
     private String mail;
-    private boolean root;
+    private String role;
 
     public String getName() {
-
         return name;
     }
 
@@ -22,11 +22,11 @@ public class User {
         this.mail = mail;
     }
 
-    public boolean isRoot() {
-        return root;
+    public String getRole() {
+        return role;
     }
 
-    public void setRoot(boolean root) {
-        this.root = root;
+    public void setRole(String role) {
+        this.role = role;
     }
 }

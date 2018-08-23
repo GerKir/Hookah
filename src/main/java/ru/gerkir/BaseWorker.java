@@ -1,5 +1,6 @@
 package ru.gerkir;
 
+import java.nio.file.attribute.UserPrincipalNotFoundException;
 import java.sql.*;
 
 public class BaseWorker {
@@ -40,43 +41,28 @@ public class BaseWorker {
         }
     }
 
-    public static User getUser(String account_name){
+    public static User getUser(String account_name, String account_password) throws UserPrincipalNotFoundException {
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-        try (Connection connection = DriverManager.getConnection(BaseWorker.url, user, password);
-             Statement statement = connection.createStatement()) {
-            ResultSet resultSet = statement.executeQuery("select * from users where account = '" + account_name + "';");
-            resultSet.next();
+            if (BaseWorker.check(account_name, account_password)) {
+                try (Connection connection = DriverManager.getConnection(BaseWorker.url, user, password);
+                     Statement statement = connection.createStatement()) {
+                    ResultSet resultSet = statement.executeQuery("select * from users where account = '" + account_name + "';");
 
-            User user = new User();
-            user.setName(resultSet.getString("name"));
-            user.setMail(resultSet.getString("mail"));
-            user.setRoot(resultSet.getString("root").equals("1")?true:false);
-
-            return user;
-        } catch (SQLException e) {
+                    User user = new User();
+                    while (resultSet.next()) {
+                        user.setName(resultSet.getString("name"));
+                        user.setMail(resultSet.getString("mail"));
+                        user.setRole(resultSet.getString("root"));
+                    }
+                    return user;
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            } else throw new UserPrincipalNotFoundException(account_name);
+        } catch (
+                ClassNotFoundException e) {
             e.printStackTrace();
         }
         return null;
     }
-
-//    public static String getName(String account_name, String account_password) {
-//        try {
-//            Class.forName("com.mysql.jdbc.Driver");
-//        } catch (ClassNotFoundException e) {
-//            e.printStackTrace();
-//        }
-//        try (Connection connection = DriverManager.getConnection(BaseWorker.url, user, password);
-//             Statement statement = connection.createStatement()) {
-//            ResultSet resultSet = statement.executeQuery("select * from users where account = '" + account_name + "';");
-//            resultSet.next();
-//            return resultSet.getString("name");
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//        return null;
-//    }
 }

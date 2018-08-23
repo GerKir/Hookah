@@ -14,15 +14,18 @@
     <title>Account</title>
 </head>
 <body>
-<%
-    try {
-        User user = (User) request.getSession().getAttribute("user");
-        if (user.getMail() != null) out.println("Hi, " + user.getName());
-        else out.println("Yo!");
+Hi,
+<% try {
+        if(request.getSession().getAttribute("user")!=null){
+            User user = (User) request.getSession().getAttribute("user");
+            out.println(user.getName());
+        }
+        else out.println("null");
     }
     catch (Exception e){
         out.println(e.toString());
-    } %>
+    }
+%>
 <br><a href="index.html">На главную</a>
 </body>
 </html>

@@ -1,4 +1,4 @@
-package ru.gerkir;
+package ru.gerkir.servlets;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,4 +18,5 @@ public class Account extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.getRequestDispatcher("/account.jsp").forward(request, response);
     }
+
 }
