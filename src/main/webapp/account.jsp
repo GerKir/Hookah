@@ -26,6 +26,7 @@ Hi,
         out.println(e.toString());
     }
 %>
+<br><a href="logout">Выйти</a>
 <br><a href="index.html">На главную</a>
 </body>
 </html>

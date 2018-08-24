@@ -8,22 +8,6 @@ public class BaseWorker {
     private static final String user = "root";
     private static final String password = "322";
 
-    public static boolean check(String account_name, String account_password) throws ClassNotFoundException {
-        Class.forName("com.mysql.jdbc.Driver");
-        try (Connection connection = DriverManager.getConnection(BaseWorker.url, user, password);
-             Statement statement = connection.createStatement()) {
-            ResultSet resultSet = statement.executeQuery("select * from users where account = '" + account_name + "';");
-            resultSet.next();
-
-            if (resultSet.getString("account").equals(account_name) &&
-                    resultSet.getString("password").equals(account_password)) {
-                return true;
-            } else return false;
-        } catch (SQLException e) {
-            return false;
-        }
-    }
-
     public static boolean registrationSuccsess(String account_name, String account_password) {
         try {
             Class.forName("com.mysql.jdbc.Driver");
@@ -41,24 +25,25 @@ public class BaseWorker {
         }
     }
 
-    public static User getUser(String account_name, String account_password) throws UserPrincipalNotFoundException {
+    public static User getUser(String account_name, String account_password) {
         try {
-            if (BaseWorker.check(account_name, account_password)) {
-                try (Connection connection = DriverManager.getConnection(BaseWorker.url, user, password);
-                     Statement statement = connection.createStatement()) {
-                    ResultSet resultSet = statement.executeQuery("select * from users where account = '" + account_name + "';");
-
+            Class.forName("com.mysql.jdbc.Driver");
+            try (Connection connection = DriverManager.getConnection(BaseWorker.url, user, password);
+                 Statement statement = connection.createStatement()) {
+                ResultSet resultSet = statement.executeQuery("select * from users where account = '" + account_name + "' " +
+                                                                                        "and password = '" + account_password + "';");
+                resultSet.next();
+                if (resultSet.getString("account").equals(account_name) &&
+                        resultSet.getString("password").equals(account_password)) {
                     User user = new User();
-                    while (resultSet.next()) {
-                        user.setName(resultSet.getString("name"));
-                        user.setMail(resultSet.getString("mail"));
-                        user.setRole(resultSet.getString("root"));
-                    }
+                    user.setName(resultSet.getString("name"));
+                    user.setMail(resultSet.getString("mail"));
+                    user.setRole(resultSet.getString("root"));
                     return user;
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            } else throw new UserPrincipalNotFoundException(account_name);
+                } else return null;
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         } catch (
                 ClassNotFoundException e) {
             e.printStackTrace();

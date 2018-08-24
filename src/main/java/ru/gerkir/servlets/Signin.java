@@ -33,11 +33,11 @@ public class Signin extends HttpServlet {
             request.getRequestDispatcher("/signin.jsp").forward(request, response);
         }
 
-        try {
-            User user = BaseWorker.getUser(s1, s2);
+        User user = BaseWorker.getUser(s1, s2);
+        if (user != null) {
             request.getSession().setAttribute("user", user);
             response.sendRedirect("/account");
-        } catch (UserPrincipalNotFoundException e){
+        } else {
             response.addHeader("message", "Неверный аккаунт или пароль");
             request.getRequestDispatcher("/signin.jsp").forward(request, response);
         }
