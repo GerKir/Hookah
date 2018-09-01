@@ -8,7 +8,6 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import java.io.IOException;
-import java.nio.file.attribute.UserPrincipalNotFoundException;
 
 @WebServlet("/signin")
 public class Signin extends HttpServlet {
@@ -25,8 +24,11 @@ public class Signin extends HttpServlet {
             HttpServletRequest request, HttpServletResponse response)
             throws IOException, ServletException {
 
+        request.setCharacterEncoding("UTF-8");
+
         String s1 = request.getParameter("login");
         String s2 = request.getParameter("password");
+
         response.addHeader("login", s1);
         if (s1 == null || s2 == null || s1.equals("") || s2.equals("")) {
             response.addHeader("message", "Заполните все поля");

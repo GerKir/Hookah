@@ -3,12 +3,13 @@
     Created on : 13.06.2018, 15:41:57
     Author     : gerkir
 --%>
-<%@page contentType="text/html" pageEncoding="UTF-8" %>
+<%--<%@page contentType="text/html" pageEncoding="UTF-8" %>--%>
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en"> <!--<![endif]-->
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <title>Вход | Дымный патруль</title>
     <link rel="stylesheet" href="css/style2.css">
     <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
@@ -36,7 +37,8 @@
             <p><input type="text" name="login"
                       placeholder="Логин"
                       value=
-                          <%if (response.getHeader("login") != null) out.println(response.getHeader("login"));
+                          <%response.setCharacterEncoding("UTF-8");
+                          if (response.getHeader("login") != null) out.println(response.getHeader("login"));
                           else out.println("");%>
             >
             </p>

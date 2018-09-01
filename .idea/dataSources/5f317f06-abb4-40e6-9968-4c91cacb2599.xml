@@ -2,7 +2,7 @@
 <dataSource name="hookah@localhost">
   <database-model serializer="dbm" rdbms="MYSQL" format-version="4.9">
     <root id="1">
-      <ServerVersion>5.7.22</ServerVersion>
+      <ServerVersion>5.7.23</ServerVersion>
       <DefaultEngine>InnoDB</DefaultEngine>
       <DefaultTmpEngine>InnoDB</DefaultTmpEngine>
       <DefaultCasing>exact</DefaultCasing>
@@ -912,54 +912,90 @@
       <Charset>utf8mb4</Charset>
       <DefaultForCharset>0</DefaultForCharset>
     </collation>
-    <table id="229" parent="2" name="users"/>
-    <column id="230" parent="229" name="id">
+    <table id="229" parent="2" name="Hookahs">
+      <Collation>utf8_general_ci</Collation>
+    </table>
+    <table id="230" parent="2" name="users"/>
+    <column id="231" parent="229" name="id">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="231" parent="229" name="account">
+    <column id="232" parent="229" name="name">
       <Position>2</Position>
       <DataType>varchar(25)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="232" parent="229" name="password">
+    <column id="233" parent="229" name="description">
+      <Position>3</Position>
+      <DataType>mediumtext|0s</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="234" parent="229" name="address">
+      <Position>4</Position>
+      <DataType>varchar(90)|0s</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="235" parent="229" name="pictures">
+      <Position>5</Position>
+      <DataType>varchar(90)|0s</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <key id="236" parent="229" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="237" parent="230" name="id">
+      <Position>1</Position>
+      <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="238" parent="230" name="account">
+      <Position>2</Position>
+      <DataType>varchar(25)|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="239" parent="230" name="password">
       <Position>3</Position>
       <DataType>varchar(25)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="233" parent="229" name="name">
+    <column id="240" parent="230" name="name">
       <Position>4</Position>
       <DataType>varchar(25)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="234" parent="229" name="mail">
+    <column id="241" parent="230" name="mail">
       <Position>5</Position>
       <DataType>varchar(25)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="235" parent="229" name="root">
+    <column id="242" parent="230" name="root">
       <Position>6</Position>
       <DataType>tinyint(1)|0s</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>&apos;0&apos;</DefaultExpression>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="236" parent="229" name="users_account_uindex">
+    <index id="243" parent="230" name="users_account_uindex">
       <ColNames>account</ColNames>
       <Unique>1</Unique>
       <Type>btree</Type>
     </index>
-    <key id="237" parent="229" name="PRIMARY">
+    <key id="244" parent="230" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <key id="238" parent="229" name="users_account_uindex">
+    <key id="245" parent="230" name="users_account_uindex">
       <ColNames>account</ColNames>
       <UnderlyingIndexName>users_account_uindex</UnderlyingIndexName>
     </key>
